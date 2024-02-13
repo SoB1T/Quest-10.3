@@ -1,4 +1,5 @@
 from django.urls import path
+
 # Импортируем созданные нами представления
 from .views import PostsList, PostDetails, PostCreate, PostDelete, PostUpdate, subscribe_category, subscribe_author, \
    CommentCreate
@@ -15,6 +16,6 @@ urlpatterns = [
    path('news/<int:pk>/update/', PostDelete.as_view(), name="news_delete"),
    path('<int:post_id>/category/<int:category_id>/subscribe', subscribe_category, name='subscribe'),
    path('<int:post_id>/author/<int:author_id>/subscribe', subscribe_author, name='subscribe'),
-   path('<int:post_id>/comment', CommentCreate.as_view(), name="comment_add")
+   path('<int:post_id>/comment', CommentCreate.as_view(), name="comment_add"),
 
 ]

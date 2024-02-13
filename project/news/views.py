@@ -1,5 +1,4 @@
 from datetime import datetime
-
 from django.contrib.auth.decorators import login_required
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
@@ -12,8 +11,7 @@ from .forms import PostForm, CommentForm
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.shortcuts import redirect, get_object_or_404, render
 from django.contrib.auth.models import Group, User
-
-
+from django.http import HttpResponse
 # @login_required
 # def add_comment(request, post_id, ):
 #     user = request.user
@@ -67,7 +65,9 @@ class PostsList(ListView):
         context['filterset'] = self.filterset
         context['is_author'] = self.request.user.groups.filter(name='author').exists()
         return context
-
+    # def get(self, request):
+    #     hello.delay()
+    #     return HttpResponse('Hello!')
 
 class PostDetails(DetailView):
     model = Post
@@ -141,4 +141,5 @@ class CommentCreate(CreateView):
         return context
 
     def get_success_url(self):
-        return f"http://127.0.0.1:8000/posts/{self.kwargs["post_id"]}"
+        return f"http://127.0.0.1:8000/posts/{self.kwargs['post_id']}"
+
